@@ -17,11 +17,10 @@ export class ProductsComponent {
   getProducts(): void {
     this.managerCentralService.getProducts()
         .subscribe(result => this.process(result));
-        
   }
 
   process(event: any):void{
     console.log(event)
-    this.myProducts = event["data"]
+    this.myProducts = event
   }
 }

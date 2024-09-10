@@ -3,12 +3,12 @@
 
 <button (click)="getProducts()" >get products</button>
 
-@for (item of myProducts; track item[0]) {
+@for (item of myProducts; track $index) {
 
     <br>
     <br>
     <br>
-    Item #{{ item[0] }}: 
+    Item #{{ $index }}: 
     <br>
     <br>{{ item }}
     }

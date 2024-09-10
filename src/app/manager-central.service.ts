@@ -14,4 +14,9 @@ export class ManagerCentralService {
     return answer
   }
 
+  getOrders(): Observable<any>{
+    let answer: any = this.httpClient.get<any>('http://localhost:5000/orders')
+    return answer
+  }
+
 }

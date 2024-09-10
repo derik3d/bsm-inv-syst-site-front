@@ -1,1 +1,13 @@
 <p>orders works!</p>
+
+<button (click)="getOrders()" >get orders</button>
+
+@for (item of myOrders; track $index) {
+
+    <br>
+    <br>
+    <br>
+    Item #{{ $index }}: 
+    <br>
+    <br>{{ item.test }}
+    }
