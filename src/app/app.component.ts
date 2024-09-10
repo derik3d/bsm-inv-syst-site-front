@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { ProductsComponent } from './products/products.component';
+import { OrdersComponent } from './orders/orders.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ManagerCentralService } from './manager-central.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    ProductsComponent,
+    OrdersComponent,
+    HttpClientModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'bsm-inv-syst-site-front';
+  title = 'Big store manager';
 }
