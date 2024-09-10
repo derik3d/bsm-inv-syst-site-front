@@ -1,0 +1,8 @@
+<p>products works!</p>
+
+
+<button (click)="getProducts()" >get products</button>
+
+@for (item of myProducts; track item[0]) {
+    Item #{{ item }}: {{ item }}
+    }
