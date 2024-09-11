@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { ManagerCentralService } from '../manager-central.service';
-import { JsonPipe } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [JsonPipe,
+    CommonModule ,
+    ReactiveFormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })

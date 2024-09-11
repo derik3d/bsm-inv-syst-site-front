@@ -1,18 +1,34 @@
-<p>orders works!</p>
+<!-- src/app/components/orders/orders.component.html -->
+<div class="container">
+  <h1 class="title">Orders</h1>
 
-<button (click)="consultOrder()">Consult Order</button>
-<input id="inputField" [(ngModel)]="detailReqId" placeholder="Enter Order id">
-<br><br>
-data: {{detailOrderData | json}}
-<br><br><br><br><br>
-<button (click)="getOrders()" >get orders</button>
+  <div class="search-container">
+    <input 
+      id="inputField" 
+      [(ngModel)]="detailReqId" 
+      placeholder="Enter Order ID" 
+      class="input-field"
+    />
+    <button class="btn btn-primary" (click)="consultOrder()">Consult Order</button>
+  </div>
 
-@for (item of myOrders; track $index) {
+  <div *ngIf="detailOrderData" class="order-detail">
+    <h2>Order Details</h2>
+    <pre>{{ detailOrderData | json }}</pre>    
+  </div>
 
-    <br>
-    <br>
-    <br>
-    Item #{{ $index }}: 
-    <br>
-    <br>{{ item | json }}
-    }
+  <div class="orders-container">
+    <button class="btn btn-primary" (click)="getOrders()">Get Orders</button>
+
+    <div *ngIf="myOrders.length" class="order-list">
+      <div *ngFor="let item of myOrders; let i = index" class="order-item">
+        <div class="order-header">
+          <h3>Order #{{ i + 1 }}</h3>
+        </div>
+        <div class="order-details">
+          <pre>{{ item | json }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
