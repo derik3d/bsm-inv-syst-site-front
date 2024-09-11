@@ -1,26 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProductService } from './component/product/product.service';
+import { OrderService } from './component/order/order.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManagerCentralService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private serviceProduct: ProductService,
+    private serviceOrders: OrderService,
+  ) {
+   }
 
   getProducts(): Observable<any>{
-    let answer: any = this.httpClient.get<any>('http://localhost:5000/products')
+    let answer: any = this.serviceProduct.getAll()
     return answer
   }
 
   getOrders(): Observable<any>{
-    let answer: any = this.httpClient.get<any>('http://localhost:5000/orders')
+    let answer: any = this.serviceOrders.getAll()
     return answer
   }
 
   consultOrder(id:string): Observable<any>{
-    let answer: any = this.httpClient.get<any>('http://localhost:5000/orders'+ "/" + id)
+    let answer: any = this.serviceOrders.get(id)
     return answer
   }
 
