@@ -21,18 +21,12 @@ export class OrdersComponent {
   inputValueOrderDetail:any = ""
 
   consultOrder(): void {
-    
-    alert("hi")
-
     this.managerCentralService
     .consultOrder(this.detailReqId)
     .subscribe(result => this.detailOrderData = result);
-
   }
 
   getOrders(): void {
-
-    alert("hi")
     this.managerCentralService
     .getOrders()
     .subscribe(result => this.process(result));
