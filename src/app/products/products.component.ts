@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ManagerCentralService } from '../manager-central.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
