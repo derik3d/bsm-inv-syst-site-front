@@ -1,23 +1,47 @@
-.button {
-    box-shadow: inset 0 1px 0 0 #ffffff;
-    background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-    border-radius: 6px;
-    border: 1px solid #dcdcdc;
-    display: inline-block;
-    cursor: pointer;
-    color: #666666;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 6px 24px;
+/* src/app/components/navigation/navigation.component.css */
+:host {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  header {
+    background: linear-gradient(to right, #1f0f0d, #d83a56);
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .nav-link {
     text-decoration: none;
-    text-shadow: 0 1px 0 #ffffff;
-    outline: 0;
-}
-.activebutton {
-    box-shadow: inset 0 1px 0 0 #dcecfb;
-    background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
-    border: 1px solid #84bbf3;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    background-color: #31356b;
     color: #ffffff;
-    text-shadow: 0 1px 0 #528ecc;
-}
+    transform: translateY(-3px);
+  }
+  
+  .nav-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+  }
+  
