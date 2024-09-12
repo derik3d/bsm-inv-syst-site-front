@@ -1,0 +1,65 @@
+
+<div>
+  <h2>{{ entityName }} List</h2>
+
+  <ul>
+    <li *ngFor="let entity of entities" (click)="selectEntity(entity)">
+      {{ entity | json }}
+    </li>
+  </ul>
+
+  <!-- Form for creating or updating an entity -->
+  <form [formGroup]="entityForm" *ngIf="selectedEntity || entityForm?.controls?.['length']">
+    <label *ngFor="let key of entityForm?.controls | keyvalue">
+      {{ key.key | titlecase }}:
+      <input [formControlName]="key.key" />
+    </label>
+  </form>
+
+  <!-- Button to create a new entity -->
+  <button (click)="createEntity()">Create New {{ entityName }}</button>
+
+  <!-- Buttons to update or delete the selected entity -->
+  <button *ngIf="selectedEntity" (click)="updateEntity()">Update {{ entityName }}</button>
+  <button *ngIf="selectedEntity?.id" (click)="deleteEntity()">Delete {{ entityName }}</button>
+</div>
+
+
+-----------------------------------------------------
+
+
+<form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <li *ngFor="let item of getInputsArray()" >
+        <div>
+          <label [for]="item.name">{{ item.title }}</label>
+          <label [for]="item.name">{{ item.description }}</label>
+          <input [id]="item.name" [formControlName]="item.name" type="text">
+        </div>
+    </li>
+  
+      <button type="submit">Submit</button>
+    </form>
+  
+    ------------------------------------------------
+  
+    <button (click)="getEntity()">Queried entity</button>
+    <br><br>
+    <div *ngIf="queriedEntity">
+      <div>
+        <pre>{{ queriedEntity | json }}</pre>
+      </div>
+    </div>
+  
+  -------------------------------------------
+    
+    <button (click)="getEntities()">Consult  {{ entityClassName }}</button>
+  
+    <div *ngIf="entities?.length">
+      <ul>
+        <li *ngFor="let entity of entities" (click)="selectEntity(entity)">
+          {{ entity | json }}
+        </li>
+      </ul>
+    </div>
+  
+    ------------------------------------------------
