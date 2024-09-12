@@ -27,10 +27,6 @@ export abstract class GeneralCrudService<T extends Identifiable> {
     return this.http.get<T[]>(this.url);
   }
 
-  getWithString(id:string): Observable<T> {
-    return this.http.get<T>(`${this.url}/${id}`);
-  }
-
   get(entity: T): Observable<T> {
     return this.http.get<T>(`${this.url}/${entity.id}`);
   }
@@ -43,7 +39,7 @@ export abstract class GeneralCrudService<T extends Identifiable> {
     return this.http.put<T>(`${this.url}/${entity.id}`, entity);
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`);
+  delete(entity: T): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${entity.id}`);
   }
 }
