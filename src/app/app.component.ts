@@ -3,12 +3,13 @@ import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ManagerCentralService } from './manager-central.service';
+import { ProductComponent } from './component/product/product.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    ProductComponent,
     ProductsComponent,
     OrdersComponent,
     HttpClientModule,
