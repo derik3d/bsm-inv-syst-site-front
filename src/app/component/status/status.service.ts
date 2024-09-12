@@ -8,8 +8,7 @@ import { Status } from '../../interfaces/status.interface';
   providedIn: 'root'
 })
 export class OrderService extends GeneralCrudService<Status> {
-  constructor(http: HttpClient) {
-    super()
-    this.initialize('http://localhost:5000/status')
+  getUrl(){
+    return 'http://localhost:5000/status';
   }
 }

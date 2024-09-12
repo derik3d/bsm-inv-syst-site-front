@@ -11,13 +11,15 @@ const ENTITY_URLS: { [key: string]: string } = {
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralCrudService<T extends Identifiable> {
+export abstract class GeneralCrudService<T extends Identifiable> {
 
   private http: HttpClient = inject(HttpClient);
 
-  initialize(url:string){
-    this.url = url;
+  constructor(){
+    this.url = this.getUrl();
   }
+
+  abstract getUrl(): string;
 
   private url!: string
   
@@ -37,7 +39,7 @@ export class GeneralCrudService<T extends Identifiable> {
     return this.http.put<T>(`${this.url}/${entity.id}`, entity);
   }
 
-  delete(entity: T): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${entity.id}`);
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

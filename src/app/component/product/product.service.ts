@@ -8,8 +8,7 @@ import { Product } from '../../interfaces/product.interface';
   providedIn: 'root'
 })
 export class ProductService extends GeneralCrudService<Product> {
-  constructor(http: HttpClient) {
-    super()
-    this.initialize('http://localhost:5000/products')
+  getUrl(){
+    return 'http://localhost:5000/products';
   }
 }

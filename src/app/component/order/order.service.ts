@@ -8,8 +8,7 @@ import { Order } from '../../interfaces/order.interface';
   providedIn: 'root'
 })
 export class OrderService extends GeneralCrudService<Order> {
-  constructor(http: HttpClient) {
-    super()
-    this.initialize('http://localhost:5000/orders')
+  getUrl() {
+    return 'http://localhost:5000/orders';
   }
 }

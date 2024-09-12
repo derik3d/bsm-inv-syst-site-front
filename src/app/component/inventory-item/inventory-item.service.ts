@@ -8,8 +8,7 @@ import { InventoryItem } from '../../interfaces/inventory-item.interface';
   providedIn: 'root'
 })
 export class InventoryItemService extends GeneralCrudService<InventoryItem> {
-  constructor(http: HttpClient) {
-    super()
-    this.initialize('http://localhost:5000/inventory-items')
+  getUrl() {
+    return 'http://localhost:5000/inventory-items';
   }
 }
