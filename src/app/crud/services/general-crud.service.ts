@@ -27,8 +27,12 @@ export abstract class GeneralCrudService<T extends Identifiable> {
     return this.http.get<T[]>(this.url);
   }
 
-  get(id: string): Observable<T> {
+  getWithString(id:string): Observable<T> {
     return this.http.get<T>(`${this.url}/${id}`);
+  }
+
+  get(entity: T): Observable<T> {
+    return this.http.get<T>(`${this.url}/${entity.id}`);
   }
 
   create(entity: T): Observable<T> {

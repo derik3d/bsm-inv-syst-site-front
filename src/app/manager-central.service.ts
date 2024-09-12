@@ -26,7 +26,7 @@ export class ManagerCentralService {
   }
 
   consultOrder(id:string): Observable<any>{
-    let answer: any = this.serviceOrders.get(id)
+    let answer: any = this.serviceOrders.getWithString(id);
     return answer
   }
 
