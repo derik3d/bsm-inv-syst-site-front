@@ -1,0 +1,38 @@
+<!-- Form Section -->
+<form [formGroup]="entityForm" (ngSubmit)="onSubmit()" class="form-container">
+  <ul class="form-list">
+    <li *ngFor="let item of getInputsArray(); trackBy: trackByKey" class="form-item">
+      <div class="form-group">
+        <label [for]="item.name" class="form-label">{{ item.title }}</label>
+        <label [for]="item.name" class="form-description">{{ item.description }}</label>
+        <input [id]="item.name" [formControlName]="item.name" type="text" class="form-input">
+      </div>
+    </li>
+  </ul>
+
+  <button type="submit" class="submit-button">Submit</button>
+  <button (click)="createEntity()" class="query-button">Create New {{ entityClassName }}</button>
+  <button (click)="updateEntity()" class="query-button">Update{{ entityClassName }}</button>
+  <button (click)="deleteEntity()" class="query-button">Delete{{ entityClassName }}</button>
+
+</form>
+
+<!-- Query Entity Section -->
+<div class="query-container" class="form-container">
+  <button (click)="getEntity()" class="query-button">query one - {{ entityClassName }}</button>
+  <div *ngIf="queriedEntity" class="queried-entity">
+    <pre>{{ queriedEntity | json }}</pre>
+  </div>
+</div>
+
+<!-- Consult Entities Section -->
+<div class="consult-container" class="form-container">
+  <button (click)="getEntities()" class="consult-button">Consult entities from - {{ entityClassName }}</button>
+  <div *ngIf="entities?.length" class="entities-list">
+    <ul>
+      <li *ngFor="let entity of entities" (click)="selectEntity(entity)" class="entity-item">
+        {{ entity | json }}
+      </li>
+    </ul>
+  </div>
+</div>

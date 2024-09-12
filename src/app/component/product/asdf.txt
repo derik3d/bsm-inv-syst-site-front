@@ -1,0 +1,33 @@
+
+<div>
+    <h1>Products</h1>
+  
+    <form [formGroup]="entityForm">
+      <label for="productName">Product Name:</label>
+      <input id="productName" formControlName="productName" />
+  
+      <label for="productDescription">Product Description:</label>
+      <input id="productDescription" formControlName="productDescription" />
+  
+      <label for="fkProductTypeId">Product Type ID:</label>
+      <input id="fkProductTypeId" formControlName="fkProductTypeId" type="number" />
+  
+      <!-- Create and Update buttons -->
+      <button type="button" (click)="createEntity()">Create</button>
+      <button type="button" *ngIf="selectedEntity" (click)="updateEntity()">Update</button>
+  
+      <!-- Delete button, shown only if an entity is selected and has an ID -->
+      <button type="button" *ngIf="selectedEntity?.id" (click)="deleteEntity()">Delete</button>
+    </form>
+  
+    <!-- List of entities (products) -->
+    <div *ngIf="entities?.length">
+      <ul>
+        <li *ngFor="let entity of entities" (click)="selectEntity(entity)">
+          {{ entity.productName }} - {{ entity.productDescription }}
+        </li>
+      </ul>
+    </div>
+  
+    
+  </div>
