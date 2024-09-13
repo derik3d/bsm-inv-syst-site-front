@@ -165,3 +165,17 @@
     <button (click)="updateEntity()" class="query-button">Update{{ entityClassName }}</button>
     <button (click)="deleteEntity()" class="query-button">Delete{{ entityClassName }}</button>
   
+
+
+
+
+
+    <ul class="form-list">
+    <li *ngFor="let item of getInputsArray(); trackBy: trackByKey" class="form-item">
+      <div class="form-group">
+        <label [for]="item.name" class="form-label">{{ item.title }}</label>
+        <label [for]="item.name" class="form-description">{{ item.description }}</label>
+        <input [id]="item.name" [formControlName]="item.name" type="text" class="form-input">
+      </div>
+    </li>
+  </ul>
