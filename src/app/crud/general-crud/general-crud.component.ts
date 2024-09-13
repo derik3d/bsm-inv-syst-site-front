@@ -27,19 +27,55 @@ export abstract class GeneralCrudComponent<T extends Identifiable> implements On
   private service: GeneralCrudService<T> = inject(GeneralCrudService<T>);
 
   constructor(){
-    this.entityForm = this.fb.group(this.getFormDescription(this.fb));
+    this.entityForm = this.getFormDescription(this.fb);
     this.entityClassName = this.getClassName();
     this.flattenedData = this.flattenObject(this.entityForm.value, "", {})
   }
 
+  buildForm(data: any, formBuilder: FormBuilder): FormGroup {
+    const group: any = {};
+    Object.keys(data).forEach(key => {
+      if (typeof data[key] === 'object' && data[key] !== null) {
+        // If the key is an object, recursively create a form group
+        group[key] = this.buildForm(data[key], formBuilder);
+      } else {
+        // Create a form control for non-object types
+        group[key] = formBuilder.control(data[key] || '');
+      }
+    });
+    return formBuilder.group(group);
+  }
+  data={
+    id: 1,
+    product_name: "Smartphone",
+    product_description: "High-end smartphone",
+    fk_product_type_id: 2,
+    inner_object: {
+      id_: "",
+      el_nombresito: ""
+    }
+  }
+
   //build your form
-  abstract getFormDescription(fb: FormBuilder): { [key: string]: any };
+  //abstract getFormDescription(fb: FormBuilder): FormGroup;
   //set class name
   abstract getClassName(): string;
 
   ngOnInit(): void {
-    this.getEntities();
+    this.getEntities()
   }
+
+  objectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
+  
+  isGroup(control: any): boolean {
+    return control instanceof FormGroup;
+  }
+
+  getFormDescription(fb: FormBuilder): FormGroup {
+    return this.buildForm(this.data, fb)
+  } 
 
   selectEntity(entity: T) {
     this.selectedEntity = entity;
@@ -119,7 +155,10 @@ export abstract class GeneralCrudComponent<T extends Identifiable> implements On
   }
 
   splitOnMayus(original: string){
-    return original.replace(/([A-Z])/g, ' $1').replaceAll("_"," ").trim();
+    return original.replace(/([A-Z])/g, ' $1')
+    .replaceAll("_"," ")
+    .replaceAll("."," => ")
+    .trim();
   }
 
   lookupInfoInputs(inputName: string) : {title: string; description: string;}{
@@ -130,6 +169,7 @@ export abstract class GeneralCrudComponent<T extends Identifiable> implements On
   }
 
   onSubmit(){
+    console.log(this.entityForm)
     console.log(this.entityForm.value)
     console.log(this.flattenedData)
     console.log()
