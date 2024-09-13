@@ -120,7 +120,7 @@ export abstract class GeneralCrudComponent<T extends Identifiable> implements On
   }
 
   splitOnMayus(original: string){
-    return original.replace(/([A-Z])/g, ' $1').trim();
+    return original.replace(/([A-Z])/g, ' $1').replaceAll("_"," ").trim();
   }
 
   lookupInfoInputs(inputName: string) : {title: string; description: string;}{
