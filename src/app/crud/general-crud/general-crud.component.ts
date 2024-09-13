@@ -42,7 +42,6 @@ export abstract class GeneralCrudComponent<T extends Identifiable> implements On
   }
 
   selectEntity(entity: T) {
-    alert(JSON.stringify(entity))
     this.selectedEntity = entity;
     this.entityForm.patchValue(entity);
   }
