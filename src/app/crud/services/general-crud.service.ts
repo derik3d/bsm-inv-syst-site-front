@@ -9,20 +9,20 @@ const ENTITY_URLS: { [key: string]: string } = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export abstract class GeneralCrudService<T extends Identifiable> {
-
   private http: HttpClient = inject(HttpClient);
 
-  constructor(){
+  constructor() {
     this.url = this.getUrl();
   }
 
+  abstract getClassName(): string;
   abstract getUrl(): string;
 
-  private url!: string
-  
+  private url!: string;
+
   getAll(): Observable<T[]> {
     return this.http.get<T[]>(this.url);
   }

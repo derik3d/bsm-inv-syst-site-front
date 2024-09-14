@@ -58,7 +58,9 @@ export abstract class GeneralCrudComponent<T extends Identifiable>
     });
   }
 
-  abstract getClassName(): string;
+  getClassName(): string {
+    return this.service.getClassName();
+  }
 
   ngOnInit(): void {
     this.getEntities();

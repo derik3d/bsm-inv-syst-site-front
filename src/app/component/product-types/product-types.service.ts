@@ -5,10 +5,13 @@ import { GeneralCrudService } from '../../crud/services/general-crud.service';
 import { ProductTypes } from '../../interfaces/product-types.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductTypesService extends GeneralCrudService<ProductTypes> {
-  getUrl(){
+  override getClassName(): string {
+    return 'ProductTypes';
+  }
+  getUrl() {
     return 'http://localhost:5000/product-types';
   }
 }

@@ -20,10 +20,6 @@ import { VizCrudComponent } from '../../crud/viz-crud/viz-crud.component';
   providers: [{ provide: GeneralCrudService, useClass: ProductService }],
 })
 export class ProductComponent extends GeneralCrudComponent<Product> {
-  override getClassName(): string {
-    return 'Product';
-  }
-
   data = {
     id: 1,
     product_name: 'Smartphone',
