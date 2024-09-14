@@ -7,7 +7,7 @@ import { Status } from '../../interfaces/status.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService extends GeneralCrudService<Status> {
+export class StatusService extends GeneralCrudService<Status> {
   override getClassName(): string {
     return 'Status';
   }

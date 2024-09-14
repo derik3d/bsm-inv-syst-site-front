@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralCrudComponent } from '../../crud/general-crud/general-crud.component';
 import { GeneralCrudService } from '../../crud/services/general-crud.service';
