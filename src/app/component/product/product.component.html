@@ -1,36 +1,81 @@
-<!-- Form Section -->
-<form [formGroup]="entityForm" (ngSubmit)="onSubmit()" class="form-container">
-  <ul class="form-list">
-    <li *ngFor="let item of getInputsArray(); trackBy: trackByKey" class="form-item">
-      <div class="form-group">
-        <label [for]="item.name" class="form-label">{{ item.title }}</label>
-        <label [for]="item.name" class="form-description">{{ item.description }}</label>
-        <input [id]="item.name" [formControlName]="item.name" type="text" class="form-input">
-      </div>
-    </li>
+<form
+  *ngIf="completed_controls_loading"
+  [formGroup]="entityForm"
+  (ngSubmit)="onSubmit()"
+>
+  <ul>
+    <!-- Loop through form controls -->
+    <ng-container *ngFor="let innerKey of objectKeys(entityForm.controls)">
+      <ng-container
+        *ngTemplateOutlet="
+          renderFormField;
+          context: { key: innerKey, control: entityForm.controls[innerKey] }
+        "
+      ></ng-container>
+    </ng-container>
   </ul>
-
-  <button type="submit" class="submit-button">Submit</button>
-  <button (click)="createEntity()" class="query-button">Create New {{ entityClassName }}</button>
-  <button (click)="updateEntity()" class="query-button">Update{{ entityClassName }}</button>
-  <button (click)="deleteEntity()" class="query-button">Delete{{ entityClassName }}</button>
-
+  <button type="submit">Submit</button>
 </form>
 
+<!-- Recursive Template for Form Fields -->
+<ng-template #renderFormField let-key="key" let-control="control">
+  <ng-container *ngIf="isGroup(control); else inputField">
+    <!-- Recursive FormGroup handling -->
+    <div [formGroup]="control" class="form-group">
+      <h3>GROUP: {{ key }}</h3>
+      <ul>
+        <ng-container *ngFor="let innerKey of objectKeys(control.controls)">
+          <ng-container
+            *ngTemplateOutlet="
+              renderFormField;
+              context: { key: innerKey, control: control.controls[innerKey] }
+            "
+          ></ng-container>
+        </ng-container>
+      </ul>
+    </div>
+  </ng-container>
+
+  <!-- Input Field Template -->
+  <ng-template #inputField>
+    <label [for]="key">INPUT: {{ key }}</label>
+    <input [id]="key" [formControl]="control" type="text" class="form-input" />
+  </ng-template>
+</ng-template>
+
+<!-- Additional Buttons for CRUD operations -->
+<button (click)="createEntity()" class="query-button">
+  Create New {{ entityClassName }}
+</button>
+<button (click)="updateEntity()" class="query-button">
+  Update {{ entityClassName }}
+</button>
+<button (click)="deleteEntity()" class="query-button">
+  Delete {{ entityClassName }}
+</button>
+
 <!-- Query Entity Section -->
-<div class="query-container" class="form-container">
-  <button (click)="getEntity()" class="query-button">query one - {{ entityClassName }}</button>
+<div class="query-container form-container">
+  <button (click)="getEntity()" class="query-button">
+    Query one - {{ entityClassName }}
+  </button>
   <div *ngIf="queriedEntity" class="queried-entity">
     <pre>{{ queriedEntity | json }}</pre>
   </div>
 </div>
 
 <!-- Consult Entities Section -->
-<div class="consult-container" class="form-container">
-  <button (click)="getEntities()" class="consult-button">Consult entities from - {{ entityClassName }}</button>
+<div class="consult-container form-container">
+  <button (click)="getEntities()" class="consult-button">
+    Consult entities from - {{ entityClassName }}
+  </button>
   <div *ngIf="entities?.length" class="entities-list">
     <ul>
-      <li *ngFor="let entity of entities" (click)="selectEntity(entity)" class="entity-item">
+      <li
+        *ngFor="let entity of entities"
+        (click)="selectEntity(entity)"
+        class="entity-item"
+      >
         {{ entity | json }}
       </li>
     </ul>

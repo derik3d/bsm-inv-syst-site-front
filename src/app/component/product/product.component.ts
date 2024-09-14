@@ -6,30 +6,51 @@ import { Product } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
 import { ProductService } from './product.service';
 
-
-
 @Component({
   selector: 'app-product-crud',
   standalone: true,
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   imports: [
-    CommonModule ,
-    ReactiveFormsModule // Add ReactiveFormsModule here
+    CommonModule,
+    ReactiveFormsModule, // Add ReactiveFormsModule here
   ],
-  providers: [
-    { provide: GeneralCrudService, useClass: ProductService }
-  ]
+  providers: [{ provide: GeneralCrudService, useClass: ProductService }],
 })
 export class ProductComponent extends GeneralCrudComponent<Product> {
-
   override getClassName(): string {
-    return "Product"
+    return 'Product';
   }
 
-  trackByKey(index: number, item: any): string {
-    return item.name;
+
+
+  data = {
+    id: 1,
+    product_name: 'Smartphone',
+    product_description: 'High-end smartphone',
+    fk_product_type_id: 2,
+    inner_object: {
+      id_: '',
+      el_nombresito: '',
+    },
+    inner_object_array: {
+      id_id: '',
+      el_nombresito: [
+        {
+          id: 1,
+          part: 1,
+        },
+        {
+          id: 1,
+          part: 1,
+        },
+      ],
+    },
+  };
+
+  override getData(): Object {
+    return this.data
   }
+
 
 }
-
