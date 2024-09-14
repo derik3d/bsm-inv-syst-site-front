@@ -20,15 +20,20 @@ import { ProductTypeService } from './product-type.service';
   providers: [{ provide: GeneralCrudService, useClass: ProductTypeService }],
 })
 export class ProductTypeComponent extends GeneralCrudComponent<Product> {
+  data = {
+    id: '66e19c799672e0d3fd60d1a3',
+    additional_info: {
+      description: 'A high-end smartphone with advanced features.',
+    },
+    creation: 1726061689.367564,
+    order_info:
+      '{"_id": "66e19c799672e0d3fd60d1b1", "creation": 1726061689.3864436, "updated": 1726061689.3864436, "status": null, "status_trace": [], "client": {"name": "Client A", "email": "client1@example.com"}, "inventory_items": [{"_id": "66e19c799672e0d3fd60d1a3", "creation": 1726061689.367564, "product_id": 1, "product_name": "Smartphone", "serial_number": "SN11", "additional_info": {"description": "A high-end smartphone with advanced features."}, "order_info": null}]}',
+    product_id: 1,
+    product_name: 'Smartphone',
+    serial_number: 'SN11',
+  };
 
-  data={
-    "id": 1,
-    "nemo": "PUT",
-    "parent_type_id": "",
-    "type_name": "public item"
-  }
   override getData(): Object {
     return this.data;
   }
-
 }
