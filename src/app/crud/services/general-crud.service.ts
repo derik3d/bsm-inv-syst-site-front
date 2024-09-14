@@ -8,9 +8,6 @@ const ENTITY_URLS: { [key: string]: string } = {
   Order: 'https://localhost:5000/orders',
 };
 
-@Injectable({
-  providedIn: 'root',
-})
 export abstract class GeneralCrudService<T extends Identifiable> {
   private http: HttpClient = inject(HttpClient);
 
