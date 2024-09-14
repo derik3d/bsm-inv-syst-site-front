@@ -10,6 +10,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-viz-crud',
@@ -21,7 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatIconModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule
   ],
   templateUrl: './viz-crud.component.html',
   styleUrl: './viz-crud.component.css'

@@ -1,20 +1,4 @@
-<p>viz-crud works!</p>
-
-
-<!-- Additional Buttons for CRUD operations -->
-<!-- Additional Buttons for CRUD operations -->
-<!-- Additional Buttons for CRUD operations -->
-<button mat-raised-button (click)="crudComponent.createEntity()" >
-  Create New: {{ crudComponent.getClassName()}}
-</button>
-
-<button mat-raised-button (click)="crudComponent.updateEntity()" >
-  Update: {{ crudComponent.getClassName() }}
-</button>
-
-<button mat-raised-button (click)="crudComponent.deleteEntity()" >
-  Delete: {{ crudComponent.getClassName() }}
-</button>
+<h2>Crud for: {{ crudComponent.getClassName() }}</h2>
 
 <form
   *ngIf="crudComponent.completed_controls_loading"
@@ -43,42 +27,70 @@
       </ng-container>
     </mat-list>
   </p>
-  <div class="example-button-row">
-    <button mat-raised-button type="submit">Submit</button>
-  </div>
+  <button mat-raised-button type="submit">Submit</button>
+  <button mat-raised-button (click)="crudComponent.createEntity()">
+    Create New: {{ crudComponent.getClassName() }}
+  </button>
+
+  <button mat-raised-button (click)="crudComponent.updateEntity()">
+    Update: {{ crudComponent.getClassName() }}
+  </button>
+
+  <button mat-raised-button (click)="crudComponent.deleteEntity()">
+    Delete: {{ crudComponent.getClassName() }}
+  </button>
 </form>
 
-
 <!-- Query Entity Section -->
-<div class="query-container form-container">
-  <button mat-raised-button (click)="crudComponent.getEntity()" class="query-button">
-    Find with Id - {{ crudComponent.getClassName() }}
-  </button>
+<mat-list>
+  <mat-divider></mat-divider>
+  <div class="query-container form-container">
+    <button
+      mat-raised-button
+      (click)="crudComponent.getEntity()"
+      class="query-button"
+    >
+      Find with Id - {{ crudComponent.getClassName() }}
+    </button>
 
-  <div *ngIf="crudComponent.queriedEntity" class="queried-entity">
-    <pre>{{ crudComponent.queriedEntity | json }}</pre>
+    <div *ngIf="crudComponent.queriedEntity" class="queried-entity">
+      <pre>{{ crudComponent.queriedEntity | json }}</pre>
+    </div>
   </div>
-</div>
-
+</mat-list>
 <!-- Consult Entities Section -->
+<!-- Consult Entities Section -->
+<!-- Consult Entities Section -->
+<!-- Consult Entities Section -->
+<mat-divider></mat-divider>
 <div class="consult-container form-container">
-  <button mat-raised-button (click)="crudComponent.getEntities()" class="consult-button">
+  <button
+    mat-raised-button
+    (click)="crudComponent.getEntities()"
+    class="consult-button"
+  >
     Consult entities from - {{ crudComponent.getClassName() }}
   </button>
+
   <div *ngIf="crudComponent.entities?.length" class="entities-list">
-    <ul>
-      <li
-        *ngFor="let entity of crudComponent.entities"
-        (click)="crudComponent.selectEntity(entity)"
-        class="entity-item"
-      >
-        {{ entity | json }}
-      </li>
-    </ul>
+    <mat-card
+      *ngFor="let entity of crudComponent.entities"
+      (click)="crudComponent.selectEntity(entity)"
+      class="example-card"
+      appearance="outlined"
+    >
+      <mat-card-header>
+        <mat-card-title
+          >{{ crudComponent.getClassName() }}:
+          {{ entity.id | json }}</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ entity | json }}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
-
-
 
 <!-- Recursive Template for Form Fields -->
 <ng-template #renderFormField let-key="key" let-control="control">
