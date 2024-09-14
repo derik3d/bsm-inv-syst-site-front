@@ -22,8 +22,6 @@ export class ProductComponent extends GeneralCrudComponent<Product> {
     return 'Product';
   }
 
-
-
   data = {
     id: 1,
     product_name: 'Smartphone',
@@ -49,8 +47,6 @@ export class ProductComponent extends GeneralCrudComponent<Product> {
   };
 
   override getData(): Object {
-    return this.data
+    return this.data;
   }
-
-
 }
