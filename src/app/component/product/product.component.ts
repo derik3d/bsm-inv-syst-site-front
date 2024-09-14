@@ -5,6 +5,7 @@ import { GeneralCrudService } from '../../crud/services/general-crud.service';
 import { Product } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
 import { ProductService } from './product.service';
+import { VizCrudComponent } from '../../crud/viz-crud/viz-crud.component';
 
 @Component({
   selector: 'app-product-crud',
@@ -12,6 +13,7 @@ import { ProductService } from './product.service';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   imports: [
+    VizCrudComponent,
     CommonModule,
     ReactiveFormsModule, // Add ReactiveFormsModule here
   ],
