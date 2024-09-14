@@ -2,12 +2,38 @@
 <header>
   <h1>{{ title }}</h1>
   <nav class="navbar">
-    <a class="nav-link" routerLink="/products" routerLinkActive="active" ariaCurrentWhenActive="page">Products</a>
-    <a class="nav-link" routerLink="/orders" routerLinkActive="active" ariaCurrentWhenActive="page">Orders</a>
-    <a class="nav-link" routerLink="/product" routerLinkActive="active" ariaCurrentWhenActive="page">Product</a>
-    <a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+    <a
+      class="nav-link"
+      routerLink="/products"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      >Products</a
+    >
+    <a
+      class="nav-link"
+      routerLink="/orders"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      >Orders</a
+    >
+
+    <ng-container *ngFor="let entity of routes">
+      <a
+        class="nav-link"
+        routerLink="/{{entity.path}}"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+        >{{entity.path}}</a
+      >
+    </ng-container>
+    <a
+      class="nav-link"
+      routerLink="/"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      >Home</a
+    >
   </nav>
 </header>
+
 <router-outlet></router-outlet>
-
-
