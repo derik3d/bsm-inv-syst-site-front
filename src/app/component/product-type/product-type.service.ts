@@ -9,7 +9,7 @@ import { ProductType } from '../../interfaces/product-type.interface';
 })
 export class ProductTypeService extends GeneralCrudService<ProductType> {
   override getClassName(): string {
-    return 'ProductTypes';
+    return 'ProductType';
   }
   getUrl() {
     return 'http://localhost:5000/product-types';

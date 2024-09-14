@@ -15,5 +15,5 @@ export const routes: Routes = [
   { path: 'inventory-item', component: InventoryItemComponent },
   { path: 'order', component: OrderComponent },
   { path: 'status', component: StatusComponent },
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', redirectTo: '/product', pathMatch: 'full' },
 ];
