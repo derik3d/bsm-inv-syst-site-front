@@ -1,0 +1,85 @@
+<p>viz-crud works!</p>
+
+<form
+  *ngIf="crudComponent.completed_controls_loading"
+  [formGroup]="crudComponent.entityForm"
+  (ngSubmit)="crudComponent.onSubmit()"
+>
+  <ul>
+    <!-- Loop through form controls -->
+    <ng-container *ngFor="let innerKey of crudComponent.objectKeys(crudComponent.entityForm.controls)">
+      <ng-container
+        *ngTemplateOutlet="
+          renderFormField;
+          context: { key: innerKey, control: crudComponent.entityForm.controls[innerKey] }
+        "
+      ></ng-container>
+    </ng-container>
+  </ul>
+  <button type="submit">Submit</button>
+</form>
+
+<!-- Recursive Template for Form Fields -->
+<ng-template #renderFormField let-key="key" let-control="control">
+  <ng-container *ngIf="crudComponent.isGroup(control); else inputField">
+    <!-- Recursive FormGroup handling -->
+    <div [formGroup]="control" class="form-group">
+      <h3>GROUP: {{ key }}</h3>
+      <ul>
+        <ng-container *ngFor="let innerKey of crudComponent.objectKeys(control.controls)">
+          <ng-container
+            *ngTemplateOutlet="
+              renderFormField;
+              context: { key: innerKey, control: control.controls[innerKey] }
+            "
+          ></ng-container>
+        </ng-container>
+      </ul>
+    </div>
+  </ng-container>
+
+  <!-- Input Field Template -->
+  <ng-template #inputField>
+    <label [for]="key">INPUT: {{ key }}</label>
+    <input [id]="key" [formControl]="control" type="text" class="form-input" />
+  </ng-template>
+</ng-template>
+
+<!-- Additional Buttons for CRUD operations -->
+<button (click)="crudComponent.createEntity()" class="query-button">
+  Create New {{ crudComponent.entityClassName }}
+</button>
+<button (click)="crudComponent.updateEntity()" class="query-button">
+  Update {{ crudComponent.entityClassName }}
+</button>
+<button (click)="crudComponent.deleteEntity()" class="query-button">
+  Delete {{ crudComponent.entityClassName }}
+</button>
+
+<!-- Query Entity Section -->
+<div class="query-container form-container">
+  <button (click)="crudComponent.getEntity()" class="query-button">
+    Query one - {{ crudComponent.entityClassName }}
+  </button>
+  <div *ngIf="crudComponent.queriedEntity" class="queried-entity">
+    <pre>{{ crudComponent.queriedEntity | json }}</pre>
+  </div>
+</div>
+
+<!-- Consult Entities Section -->
+<div class="consult-container form-container">
+  <button (click)="crudComponent.getEntities()" class="consult-button">
+    Consult entities from - {{ crudComponent.entityClassName }}
+  </button>
+  <div *ngIf="crudComponent.entities?.length" class="entities-list">
+    <ul>
+      <li
+        *ngFor="let entity of crudComponent.entities"
+        (click)="crudComponent.selectEntity(entity)"
+        class="entity-item"
+      >
+        {{ entity | json }}
+      </li>
+    </ul>
+  </div>
+</div>
