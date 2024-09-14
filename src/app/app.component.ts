@@ -34,8 +34,6 @@ export class AppComponent {
   title = 'Big store manager';
 
   routes = [
-    { path: 'products' },
-    { path: 'orders' },
     { path: 'product' },
     { path: 'product-type' },
     { path: 'inventory-item' },
