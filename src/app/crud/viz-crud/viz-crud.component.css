@@ -1,13 +1,21 @@
-/* Form Styles */
+.general-container{
+  max-width: 80%;
+  margin: auto auto auto auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
 
-  .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
+.form-buttons{
+  display: flex;
+  justify-content: space-around;
+}
 
-  
+.input {
+  width: 200px;
+}
+
+mat-form-field {
+  width: 100%; /* Ensure the form field spans the full width of its container */
+}
+

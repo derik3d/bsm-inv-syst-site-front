@@ -1,135 +1,165 @@
-<h2>Crud for: {{ crudComponent.getClassName() }}</h2>
 
-<form
-  *ngIf="crudComponent.completed_controls_loading"
-  [formGroup]="crudComponent.entityForm"
-  (ngSubmit)="crudComponent.onSubmit()"
->
-  <p>
-    <mat-list>
-      <!-- Loop through form controls -->
-      <ng-container
-        *ngFor="
-          let innerKey of crudComponent.objectKeys(
-            crudComponent.entityForm.controls
-          )
-        "
-      >
+<div class="general-container">
+  <h2>Crud for: {{ crudComponent.getClassName() }}</h2>
+  <form
+    *ngIf="crudComponent.completed_controls_loading"
+    [formGroup]="crudComponent.entityForm"
+    (ngSubmit)="crudComponent.onSubmit()"
+  >
+    <p>
+      <mat-list>
+        <!-- Loop through form controls -->
         <ng-container
-          *ngTemplateOutlet="
-            renderFormField;
-            context: {
-              key: innerKey,
-              control: crudComponent.entityForm.controls[innerKey]
-            }
+          *ngFor="
+            let innerKey of crudComponent.objectKeys(
+              crudComponent.entityForm.controls
+            )
           "
-        ></ng-container>
-      </ng-container>
-    </mat-list>
-  </p>
-  <button mat-raised-button type="submit">Submit</button>
-  <button mat-raised-button (click)="crudComponent.createEntity()">
-    Create New: {{ crudComponent.getClassName() }}
-  </button>
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              renderFormField;
+              context: {
+                key: innerKey,
+                control: crudComponent.entityForm.controls[innerKey]
+              }
+            "
+          ></ng-container>
+        </ng-container>
+      </mat-list>
+    </p>
+  </form>
+  
+  <div class="form-buttons">
 
-  <button mat-raised-button (click)="crudComponent.updateEntity()">
-    Update: {{ crudComponent.getClassName() }}
-  </button>
-
-  <button mat-raised-button (click)="crudComponent.deleteEntity()">
-    Delete: {{ crudComponent.getClassName() }}
-  </button>
-</form>
-
-<!-- Query Entity Section -->
-<mat-list>
-  <mat-divider></mat-divider>
-  <div class="query-container form-container">
-    <button
-      mat-raised-button
-      (click)="crudComponent.getEntity()"
-      class="query-button"
-    >
-      Find with Id - {{ crudComponent.getClassName() }}
+    <button mat-raised-button (click)="crudComponent.createEntity()">
+      Create New: {{ crudComponent.getClassName() }}
+    </button>
+  
+    <button mat-raised-button (click)="crudComponent.updateEntity()">
+      Update: {{ crudComponent.getClassName() }}
+    </button>
+  
+    <button mat-raised-button (click)="crudComponent.deleteEntity()">
+      Delete: {{ crudComponent.getClassName() }}
     </button>
 
-    <div *ngIf="crudComponent.queriedEntity" class="queried-entity">
-      <pre>{{ crudComponent.queriedEntity | json }}</pre>
+    <button mat-raised-button type="submit">Submit</button>
+  </div>
+
+  <!-- Query Entity Section -->
+  <mat-list>
+    <mat-divider></mat-divider>
+    <div>
+      <button mat-raised-button (click)="crudComponent.getEntity()">
+        Find with Id - {{ crudComponent.getClassName() }}
+      </button>
+
+      <div *ngIf="crudComponent.queriedEntity">
+
+
+
+
+
+
+
+
+
+
+        <mat-card>
+        <mat-card-header>
+          <mat-card-title
+            >{{ crudComponent.getClassName() }}:
+            {{ crudComponent.queriedEntity.id | json }}</mat-card-title
+          >
+        </mat-card-header>
+        <mat-card-content>
+          {{  crudComponent.queriedEntity  | json }}
+        </mat-card-content>
+      </mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
     </div>
-  </div>
-</mat-list>
-<!-- Consult Entities Section -->
-<!-- Consult Entities Section -->
-<!-- Consult Entities Section -->
-<!-- Consult Entities Section -->
-<mat-divider></mat-divider>
-<div class="consult-container form-container">
-  <button
-    mat-raised-button
-    (click)="crudComponent.getEntities()"
-    class="consult-button"
-  >
-    Consult entities from - {{ crudComponent.getClassName() }}
-  </button>
-
-  <div *ngIf="crudComponent.entities?.length" class="entities-list">
-    <mat-card
-      *ngFor="let entity of crudComponent.entities"
-      (click)="crudComponent.selectEntity(entity)"
-      class="example-card"
-      appearance="outlined"
-    >
-      <mat-card-header>
-        <mat-card-title
-          >{{ crudComponent.getClassName() }}:
-          {{ entity.id | json }}</mat-card-title
-        >
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ entity | json }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
-
-<!-- Recursive Template for Form Fields -->
-<ng-template #renderFormField let-key="key" let-control="control">
-  <ng-container *ngIf="crudComponent.isGroup(control); else inputField">
-    <!-- Recursive FormGroup handling -->
-    <!-- Recursive FormGroup handling -->
-    <!-- Recursive FormGroup handling -->
-    <div [formGroup]="control">
-      <h3>Group: {{ key }}</h3>
-      <ng-container
-        *ngFor="let innerKey of crudComponent.objectKeys(control.controls)"
+  </mat-list>
+  <!-- Consult Entities Section -->
+  <!-- Consult Entities Section -->
+  <!-- Consult Entities Section -->
+  <!-- Consult Entities Section -->
+  <mat-divider></mat-divider>
+  <div>
+    <button mat-raised-button (click)="crudComponent.getEntities()">
+      Consult entities from - {{ crudComponent.getClassName() }}
+    </button>
+    <div *ngIf="crudComponent.entities?.length">
+      <mat-card
+        *ngFor="let entity of crudComponent.entities"
+        (click)="crudComponent.selectEntity(entity)"
+        appearance="outlined"
       >
-        <ng-container
-          *ngTemplateOutlet="
-            renderFormField;
-            context: { key: innerKey, control: control.controls[innerKey] }
-          "
-        ></ng-container>
-      </ng-container>
+        <mat-card-header>
+          <mat-card-title
+            >{{ crudComponent.getClassName() }}:
+            {{ entity.id | json }}</mat-card-title
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ entity | json }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
-  </ng-container>
-  <!-- Input Field Template -->
-  <!-- Input Field Template -->
-  <!-- Input Field Template -->
-  <ng-template #inputField>
-    <p>
-      <mat-form-field class="example-full-width">
-        <mat-label>INPUT: {{ key }}<label [for]="key">label</label></mat-label>
-        <input
-          matInput
-          placeholder="placeholder"
-          [id]="key"
-          [formControl]="control"
-          type="text"
-          class="form-input"
-        />
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
-    </p>
+  </div>
+
+  <!-- Recursive Template for Form Fields -->
+  <ng-template #renderFormField let-key="key" let-control="control">
+    <ng-container *ngIf="crudComponent.isGroup(control); else inputField">
+      <!-- Recursive FormGroup handling -->
+      <!-- Recursive FormGroup handling -->
+      <!-- Recursive FormGroup handling -->
+      <div [formGroup]="control">
+        <h3>Group: {{ key }}</h3>
+        <ng-container
+          *ngFor="let innerKey of crudComponent.objectKeys(control.controls)"
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              renderFormField;
+              context: { key: innerKey, control: control.controls[innerKey] }
+            "
+          ></ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+    <!-- Input Field Template -->
+    <!-- Input Field Template -->
+    <ng-template #inputField>
+      <p>
+        <mat-form-field >
+          <!-- <label [for]="key">label</label> -->
+          <mat-label>{{ key }}</mat-label>
+          <input
+            matInput
+            placeholder="placeholder"
+            [id]="key"
+            [formControl]="control"
+            type="text"
+          />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+      </p>
+    </ng-template>
   </ng-template>
-</ng-template>
+</div>
