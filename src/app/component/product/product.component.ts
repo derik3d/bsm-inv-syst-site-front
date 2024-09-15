@@ -24,24 +24,7 @@ export class ProductComponent extends GeneralCrudComponent<Product> {
     id: 1,
     product_name: 'Smartphone',
     product_description: 'High-end smartphone',
-    fk_product_type_id: 2,
-    inner_object: {
-      id_: '',
-      el_nombresito: '',
-    },
-    inner_object_array: {
-      id_id: '',
-      el_nombresito: [
-        {
-          id: 1,
-          part: 1,
-        },
-        {
-          id: 1,
-          part: 1,
-        },
-      ],
-    },
+    fk_product_type_id: 2
   };
 
   override getData(): Object {
