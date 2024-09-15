@@ -9,6 +9,7 @@
 .form-buttons{
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .input {
@@ -19,3 +20,7 @@ mat-form-field {
   width: 100%; /* Ensure the form field spans the full width of its container */
 }
 
+mat-divider {
+  height: 20px;
+  background-color: #00000000;
+}
