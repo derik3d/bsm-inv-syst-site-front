@@ -91,7 +91,7 @@
 
   <!-- Recursive Template for Form Fields -->
   <ng-template #renderFormField let-key="key" let-control="control">
-    <ng-container *ngIf="crudComponent.isGroup(control); else inputField">
+    <ng-container *ngIf="crudComponent.isGroup(control); else arrayField">
       <!-- Recursive FormGroup handling -->
       <div [formGroup]="control">
         <h3>Group: {{ key }}</h3>
@@ -107,7 +107,32 @@
         </ng-container>
       </div>
     </ng-container>
-    <!-- Input Field Template -->
+
+    <ng-template #arrayField>
+      <!-- Handle FormArray /  [FormArray]="control"
+       
+          <ng-container *ngIf="crudComponent.isArray(control); else inputField">
+      <div>
+        <h3>Array: {{ key }}</h3>
+        <ng-container *ngFor="let item of control.controls; let i = index">
+          <div [formGroup]="item">
+            <ng-container
+              *ngTemplateOutlet="
+                renderFormField;
+                context: { key: i, control: item }
+              "
+            ></ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+      
+      -->
+      <ng-container *ngIf="crudComponent.isArray(control); else inputField">
+        <div>ARRAY {{ key }}</div>
+      </ng-container>
+    </ng-template>
+
     <!-- Input Field Template -->
     <ng-template #inputField>
       <p>
