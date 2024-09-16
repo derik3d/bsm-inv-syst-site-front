@@ -33,16 +33,13 @@
     <button mat-raised-button (click)="crudComponent.createEntity()">
       Create New: {{ crudComponent.getClassName() }}
     </button>
-
     <button mat-raised-button (click)="crudComponent.updateEntity()">
       Update: {{ crudComponent.getClassName() }}
     </button>
-
     <button mat-raised-button (click)="crudComponent.deleteEntity()">
       Delete: {{ crudComponent.getClassName() }}
     </button>
-
-    <button mat-raised-button type="submit">Submit</button>
+    <button mat-raised-button (click)="crudComponent.onSubmit()">Info</button>
   </div>
 
   <!-- Query Entity Section -->
@@ -52,14 +49,13 @@
       <button mat-raised-button (click)="crudComponent.getEntity()">
         Find with Id - {{ crudComponent.getClassName() }}
       </button>
-
       <div *ngIf="crudComponent.queriedEntity">
         <mat-card>
           <mat-card-header>
-            <mat-card-title
-              >{{ crudComponent.getClassName() }}:
-              {{ crudComponent.queriedEntity.id | json }}</mat-card-title
-            >
+            <mat-card-title>
+              {{ crudComponent.getClassName() }}:
+              {{ crudComponent.queriedEntity.id | json }}
+            </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             {{ crudComponent.queriedEntity | json }}
@@ -68,9 +64,7 @@
       </div>
     </div>
   </mat-list>
-  <!-- Consult Entities Section -->
-  <!-- Consult Entities Section -->
-  <!-- Consult Entities Section -->
+
   <!-- Consult Entities Section -->
   <mat-divider></mat-divider>
   <div>
@@ -84,10 +78,9 @@
         appearance="outlined"
       >
         <mat-card-header>
-          <mat-card-title
-            >{{ crudComponent.getClassName() }}:
-            {{ entity.id | json }}</mat-card-title
-          >
+          <mat-card-title>
+            {{ crudComponent.getClassName() }}: {{ entity.id | json }}
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>{{ entity | json }}</p>
@@ -99,8 +92,6 @@
   <!-- Recursive Template for Form Fields -->
   <ng-template #renderFormField let-key="key" let-control="control">
     <ng-container *ngIf="crudComponent.isGroup(control); else inputField">
-      <!-- Recursive FormGroup handling -->
-      <!-- Recursive FormGroup handling -->
       <!-- Recursive FormGroup handling -->
       <div [formGroup]="control">
         <h3>Group: {{ key }}</h3>
@@ -121,7 +112,7 @@
     <ng-template #inputField>
       <p>
         <mat-form-field>
-          <!-- <label [for]="key">label</label> -->
+          <!-- example use label <label [for]="key">label</label> -->
           <mat-label>{{ key }}</mat-label>
           <input
             matInput
