@@ -1,4 +1,3 @@
-
 <div class="general-container">
   <h2>Crud for: {{ crudComponent.getClassName() }}</h2>
   <form
@@ -29,17 +28,16 @@
       </mat-list>
     </p>
   </form>
-  
-  <div class="form-buttons">
 
+  <div class="form-buttons">
     <button mat-raised-button (click)="crudComponent.createEntity()">
       Create New: {{ crudComponent.getClassName() }}
     </button>
-  
+
     <button mat-raised-button (click)="crudComponent.updateEntity()">
       Update: {{ crudComponent.getClassName() }}
     </button>
-  
+
     <button mat-raised-button (click)="crudComponent.deleteEntity()">
       Delete: {{ crudComponent.getClassName() }}
     </button>
@@ -56,41 +54,17 @@
       </button>
 
       <div *ngIf="crudComponent.queriedEntity">
-
-
-
-
-
-
-
-
-
-
         <mat-card>
-        <mat-card-header>
-          <mat-card-title
-            >{{ crudComponent.getClassName() }}:
-            {{ crudComponent.queriedEntity.id | json }}</mat-card-title
-          >
-        </mat-card-header>
-        <mat-card-content>
-          {{  crudComponent.queriedEntity  | json }}
-        </mat-card-content>
-      </mat-card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <mat-card-header>
+            <mat-card-title
+              >{{ crudComponent.getClassName() }}:
+              {{ crudComponent.queriedEntity.id | json }}</mat-card-title
+            >
+          </mat-card-header>
+          <mat-card-content>
+            {{ crudComponent.queriedEntity | json }}
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
   </mat-list>
@@ -146,7 +120,7 @@
     <!-- Input Field Template -->
     <ng-template #inputField>
       <p>
-        <mat-form-field >
+        <mat-form-field>
           <!-- <label [for]="key">label</label> -->
           <mat-label>{{ key }}</mat-label>
           <input
