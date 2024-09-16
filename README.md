@@ -25,3 +25,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
+falta agregar un card para los grupos
+
+falta modificar viz, para mostrar selectivamente los diferentes tipos de viz
+-list all
+-detail
+-modify
+-buttons by types
+
+hacer prueba de un componente que pueda acceder a dos componentes a la vez y mostrar diferentes
+informacion de los dos a la vez
+
