@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormControlDirective,
+  FormArray,
   FormControl,
   AbstractControl,
 } from '@angular/forms';
@@ -69,22 +69,36 @@ export abstract class GeneralCrudComponent<T extends Identifiable>
   abstract getData(): Object;
 
   buildFormWithDescriptor(fb: FormBuilder): FormGroup {
-    return this.parseObjectToForm(this.getData(), fb);
+    return this.parseObjectToForm(this.getData(), fb) as FormGroup;
   }
 
-  parseObjectToForm(data: any, formBuilder: FormBuilder): FormGroup {
-    const group: any = {};
+
+  parseObjectToForm(data: any, formBuilder: FormBuilder): AbstractControl {
+    if (Array.isArray(data)) {
+      // Handle arrays
+      return this.parseArrayToForm(data, formBuilder);
+    } else if (typeof data === 'object' && data !== null) {
+      // Handle objects
+      return this.parseObjectToFormGroup(data, formBuilder);
+    } else {
+      // Handle simple values
+      return formBuilder.control(data || '');
+    }
+  }
+  
+  // Function to handle object types and create a FormGroup
+  parseObjectToFormGroup(data: any, formBuilder: FormBuilder): FormGroup {
+    const group: { [key: string]: AbstractControl } = {};
     Object.keys(data).forEach((key) => {
-      if (typeof data[key] === 'object' && data[key] !== null) {
-        // If the key is an object, recursively create a form group
-        group[key] = this.parseObjectToForm(data[key], formBuilder);
-      } else {
-        // Create a form control for non-object types
-        group[key] = formBuilder.control(data[key] || '');
-        this.controls_list.push(group[key]);
-      }
+      group[key] = this.parseObjectToForm(data[key], formBuilder);
     });
     return formBuilder.group(group);
+  }
+  
+  // Function to handle arrays and create a FormArray
+  parseArrayToForm(data: any[], formBuilder: FormBuilder): FormArray {
+    const controls = data.map(item => this.parseObjectToForm(item, formBuilder));
+    return formBuilder.array(controls);
   }
 
   //---------------really GENERAL
@@ -208,6 +222,10 @@ export abstract class GeneralCrudComponent<T extends Identifiable>
 
   isGroup(control: any): boolean {
     return control instanceof FormGroup;
+  }
+
+  isArray(control: any): boolean {
+    return control instanceof FormArray;
   }
 
   objectKeys(obj: any): string[] {
